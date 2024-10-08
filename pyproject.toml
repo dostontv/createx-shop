@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "createx-shop"
+version = "0.1.0"
+description = ""
+authors = ["dostontv <dostontv969@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.1"
+django-extensions = "^3.2.3"
+djangorestframework = "^3.15.2"
+drf-spectacular = "^0.27.2"
+django-mptt = "^0.16.0"
+django-tinymce = "^4.1.0"
+djangorestframework-simplejwt = "^5.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
