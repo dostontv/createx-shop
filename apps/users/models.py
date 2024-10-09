@@ -12,7 +12,7 @@ class Favourite(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
-        pass
+        db_table = "favourites"
 
     def __str__(self):
         return str(self.pk)
@@ -25,7 +25,7 @@ class ResentView(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'resent'
 
     def __str__(self):
         return str(self.pk)
@@ -43,7 +43,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
     class Meta:
-        pass
+        db_table = 'users'
 
     def __str__(self):
         return str(self.pk)
@@ -60,7 +60,7 @@ class Review(models.Model):
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'reviews'
 
     def __str__(self):
         return str(self.name)

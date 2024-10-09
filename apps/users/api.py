@@ -26,7 +26,11 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
+        self.kwargs['pk'] = request.user.id
         return super().get(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):

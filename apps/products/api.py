@@ -1,10 +1,13 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
 
 from . import serializers
 from . import models
+from . import filters
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+@extend_schema(tags=['Categories'])
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Category class"""
 
     queryset = models.Category.objects.all()
@@ -12,7 +15,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ColorViewSet(viewsets.ModelViewSet):
+@extend_schema(tags=['Colors'])
+class ColorViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Color class"""
 
     queryset = models.Color.objects.all()
@@ -20,15 +24,18 @@ class ColorViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+@extend_schema(tags=['Products'])
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Product class"""
 
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_class = filters.ProductFilter
 
 
-class ProductVariantViewSet(viewsets.ModelViewSet):
+@extend_schema(tags=['ProductVariants'])
+class ProductVariantViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the ProductVariant class"""
 
     queryset = models.ProductVariant.objects.all()
@@ -36,7 +43,8 @@ class ProductVariantViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class SizeViewSet(viewsets.ModelViewSet):
+@extend_schema(tags=['Size'])
+class SizeViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Size class"""
 
     queryset = models.Size.objects.all()

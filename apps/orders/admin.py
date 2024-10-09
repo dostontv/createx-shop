@@ -29,6 +29,7 @@ class OrderAdminForm(forms.ModelForm):
 class OrderAdmin(admin.ModelAdmin):
     form = OrderAdminForm
     list_display = [
+        "uid",
         "user",
         "last_updated",
         "created",

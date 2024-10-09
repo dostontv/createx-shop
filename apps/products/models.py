@@ -1,4 +1,3 @@
-
 from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
@@ -13,7 +12,7 @@ class Category(MPTTModel):
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'categories'
 
     def __str__(self):
         return str(self.name)
@@ -26,7 +25,7 @@ class Size(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'sizes'
 
     def __str__(self):
         return str(self.name)
@@ -39,7 +38,7 @@ class Color(models.Model):
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'colors'
 
     def __str__(self):
         return str(self.name)
@@ -48,13 +47,13 @@ class Color(models.Model):
 class Product(models.Model):
     # Fields
     name = models.CharField(max_length=30)
-    category = models.ForeignKey("Category", models.CASCADE, related_name="products")
+    category = TreeForeignKey("Category", models.CASCADE, related_name="products")
     description = HTMLField()
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'products'
 
     def __str__(self):
         return f'{self.id} - {self.name}'
@@ -71,7 +70,7 @@ class ProductVariant(models.Model):
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'productVariants'
 
     def __str__(self):
         return str(self.pk)
@@ -85,7 +84,7 @@ class Content(models.Model):
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
-        pass
+        db_table = 'content'
 
     def __str__(self):
         return f'{self.pk}'

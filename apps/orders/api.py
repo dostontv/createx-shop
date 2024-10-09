@@ -1,9 +1,10 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
 
 from . import serializers
 from . import models
 
-
+@extend_schema(tags=['Carts'])
 class CartViewSet(viewsets.ModelViewSet):
     """ViewSet for the Cart class"""
 
@@ -11,7 +12,7 @@ class CartViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CartSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
+@extend_schema(tags=['Orders'])
 class OrderViewSet(viewsets.ModelViewSet):
     """ViewSet for the Order class"""
 
@@ -19,7 +20,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
+@extend_schema(tags=['OrderItems'])
 class OrderItemViewSet(viewsets.ModelViewSet):
     """ViewSet for the OrderItem class"""
 
