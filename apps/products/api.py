@@ -30,7 +30,6 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filterset_class = filters.ProductFilter
 
 

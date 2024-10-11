@@ -4,7 +4,6 @@ from . import models
 
 
 class CategorySerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Category
         fields = [
@@ -14,8 +13,8 @@ class CategorySerializer(serializers.ModelSerializer):
             "name",
         ]
 
-class ColorSerializer(serializers.ModelSerializer):
 
+class ColorSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Color
         fields = [
@@ -24,8 +23,8 @@ class ColorSerializer(serializers.ModelSerializer):
             "created",
         ]
 
-class ContentSerializer(serializers.ModelSerializer):
 
+class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Content
         fields = [
@@ -35,8 +34,8 @@ class ContentSerializer(serializers.ModelSerializer):
             "product_variant",
         ]
 
-class ProductSerializer(serializers.ModelSerializer):
 
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = [
@@ -47,8 +46,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "created",
         ]
 
-class ProductVariantSerializer(serializers.ModelSerializer):
 
+class ProductVariantSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductVariant
         fields = [
@@ -61,8 +60,8 @@ class ProductVariantSerializer(serializers.ModelSerializer):
             "created",
         ]
 
-class SizeSerializer(serializers.ModelSerializer):
 
+class SizeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Size
         fields = [

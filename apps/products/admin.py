@@ -6,7 +6,7 @@ from . import models
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
-    mptt_indent_field = "name"
+    mptt_indent_field = 'name'
     list_display = ('tree_actions', 'indented_title',
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
@@ -39,31 +39,31 @@ class CategoryAdmin(DraggableMPTTAdmin):
 class ColorAdminForm(forms.ModelForm):
     class Meta:
         model = models.Color
-        fields = "__all__"
+        fields = '__all__'
 
 
 class ColorAdmin(admin.ModelAdmin):
     form = ColorAdminForm
     list_display = [
-        "name",
-        "last_updated",
-        "created",
+        'name',
+        'last_updated',
+        'created',
     ]
 
 
 class ProductAdminForm(forms.ModelForm):
     class Meta:
         model = models.Product
-        fields = "__all__"
+        fields = '__all__'
 
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
     list_display = [
-        "name",
-        "category",
-        "created",
-        "last_updated",
+        'name',
+        'category',
+        'created',
+        'last_updated',
     ]
 
 
@@ -78,35 +78,35 @@ class ProductVContentStackedInline(admin.StackedInline):
 class ProductVariantAdminForm(forms.ModelForm):
     class Meta:
         model = models.ProductVariant
-        fields = "__all__"
+        fields = '__all__'
 
 
 class ProductVariantAdmin(admin.ModelAdmin):
     form = ProductVariantAdminForm
     inlines = [ProductVContentStackedInline]
     list_display = [
-        "quantity",
-        "color",
-        "price",
-        "product",
-        "size",
-        "created",
-        "last_updated",
+        'quantity',
+        'color',
+        'price',
+        'product',
+        'size',
+        'created',
+        'last_updated',
     ]
 
 
 class SizeAdminForm(forms.ModelForm):
     class Meta:
         model = models.Size
-        fields = "__all__"
+        fields = '__all__'
 
 
 class SizeAdmin(admin.ModelAdmin):
     form = SizeAdminForm
     list_display = [
-        "name",
-        "last_updated",
-        "created",
+        'name',
+        'last_updated',
+        'created',
     ]
 
 
