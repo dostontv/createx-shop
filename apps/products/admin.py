@@ -6,6 +6,7 @@ from . import models
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
+    search_fields = 'name',
     mptt_indent_field = 'name'
     list_display = ('tree_actions', 'indented_title',
                     'related_products_count', 'related_products_cumulative_count')
@@ -44,6 +45,7 @@ class ColorAdminForm(forms.ModelForm):
 
 class ColorAdmin(admin.ModelAdmin):
     form = ColorAdminForm
+    search_fields = 'name',
     list_display = [
         'name',
         'last_updated',
@@ -59,9 +61,11 @@ class ProductAdminForm(forms.ModelForm):
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
+    search_fields = 'name',
     list_display = [
         'name',
         'category',
+        'views',
         'created',
         'last_updated',
     ]
@@ -84,6 +88,7 @@ class ProductVariantAdminForm(forms.ModelForm):
 class ProductVariantAdmin(admin.ModelAdmin):
     form = ProductVariantAdminForm
     inlines = [ProductVContentStackedInline]
+    autocomplete_fields = 'product',
     list_display = [
         'quantity',
         'color',

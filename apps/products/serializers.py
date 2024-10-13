@@ -7,10 +7,10 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
         fields = [
-            "parent",
-            "last_updated",
-            "created",
+            "id",
             "name",
+            "created",
+            "last_updated",
         ]
 
 
@@ -18,9 +18,10 @@ class ColorSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Color
         fields = [
+            "id",
             "name",
-            "last_updated",
             "created",
+            "last_updated",
         ]
 
 
@@ -28,10 +29,11 @@ class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Content
         fields = [
-            "last_updated",
+            "id",
             "content",
             "created",
             "product_variant",
+            "last_updated",
         ]
 
 
@@ -39,12 +41,19 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = [
-            "description",
-            "last_updated",
+            "id",
             "name",
+            "description",
             "category",
+            "views",
             "created",
+            "last_updated",
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['category'] = CategorySerializer(instance.category).data
+        return data
 
 
 class ProductVariantSerializer(serializers.ModelSerializer):
@@ -52,12 +61,12 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         model = models.ProductVariant
         fields = [
             "quantity",
-            "color",
             "price",
             "product",
-            "last_updated",
+            "color",
             "size",
             "created",
+            "last_updated",
         ]
 
 

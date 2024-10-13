@@ -1,6 +1,7 @@
 import django_filters
 
 from apps.products.models import Product, Category
+from apps.products.utils import categories_id
 
 
 class ProductFilter(django_filters.FilterSet):
@@ -8,9 +9,9 @@ class ProductFilter(django_filters.FilterSet):
 
     class Meta:
         model = Product
-        # fields = '__all__'
-        exclude = 'category'
+        fields = 'name',
 
     def filter_by_category(self, queryset, name, value):
+        category_lists = categories_id(Category.objects.get(id=int(value)), [])
 
-        pass
+        return queryset.filter(category_id__in=category_lists)

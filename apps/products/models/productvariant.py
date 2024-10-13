@@ -2,10 +2,12 @@ from django.db import models
 
 
 class ProductVariant(models.Model):
-    quantity = models.SmallIntegerField()
     price = models.FloatField()
+    quantity = models.SmallIntegerField()
     size = models.ForeignKey('products.Size', models.CASCADE)
     color = models.ForeignKey('products.Color', models.CASCADE)
+    material = models.ForeignKey('products.Material', models.SET_NULL, blank=True, null=True)
+    brand = models.ForeignKey('products.Brand', models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey('products.Product', models.CASCADE, "variants")
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)

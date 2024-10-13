@@ -38,3 +38,21 @@ class Content(models.Model):
 
     def __str__(self):
         return f'{self.pk}'
+
+
+class Material(models.Model):
+    name = models.CharField(max_length=30)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+
+    class Meta:
+        db_table = 'materials'
+
+
+class Brand(models.Model):
+    name = models.CharField(max_length=30)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+
+    class Meta:
+        db_table = 'brands'
