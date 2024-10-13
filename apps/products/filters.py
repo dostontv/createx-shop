@@ -5,7 +5,7 @@ from apps.products.utils import categories_id
 
 
 class ProductFilter(django_filters.FilterSet):
-    category = django_filters.CharFilter(method='filter_by_category')
+    category = django_filters.CharFilter(method='filter_by_category', help_text='Categories filter for all products')
 
     class Meta:
         model = Product

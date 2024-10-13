@@ -138,12 +138,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-
+    'DEFAULT_PAGINATION_CLASS': 'apps.products.pagination.CustomPagination',
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your Project API',
-    'DESCRIPTION': 'Your project description',
+    'TITLE': 'Createx-shop Project API',
+    'DESCRIPTION': 'Hala Madrid',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
