@@ -18,7 +18,10 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = [
+            "uid",
             "user",
+            "status",
+            "txn_status",
             "last_updated",
             "created",
         ]

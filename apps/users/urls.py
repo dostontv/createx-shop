@@ -8,10 +8,6 @@ from . import api
 
 
 router = routers.DefaultRouter()
-# router.register("Favourite", api.FavouriteViewSet)
-# router.register("ResentView", api.ResentViewViewSet)
-# router.register("Review", api.ReviewViewSet)
-
 
 urlpatterns = (
     path("", include(router.urls)),

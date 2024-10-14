@@ -1,9 +1,11 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-from . import serializers
-from . import models
 from . import filters
+from . import models
+from . import serializers
+from .pagination import CustomCursorPagination
 
 
 @extend_schema(tags=['Categories'])
@@ -25,21 +27,19 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @extend_schema(tags=['Products'])
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet for the Product class"""
-
+class ProductListAPIView(ListAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
     filterset_class = filters.ProductFilter
+    pagination_class = CustomCursorPagination
 
 
-@extend_schema(tags=['ProductVariants'])
-class ProductVariantViewSet(viewsets.ReadOnlyModelViewSet):
+@extend_schema(tags=['Products'])
+class ProductVariantRetrieveAPIView(RetrieveAPIView):
     """ViewSet for the ProductVariant class"""
 
     queryset = models.ProductVariant.objects.all()
     serializer_class = serializers.ProductVariantSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 
 @extend_schema(tags=['Size'])

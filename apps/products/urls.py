@@ -4,13 +4,11 @@ from rest_framework import routers
 from . import api
 
 router = routers.DefaultRouter()
-router.register("Category", api.CategoryViewSet)
-router.register("Color", api.ColorViewSet)
-router.register("Product", api.ProductViewSet)
-router.register("ProductVariant", api.ProductVariantViewSet)
-# router.register("Size", api.SizeViewSet)
+router.register('Category', api.CategoryViewSet)
 
 urlpatterns = (
-    path("", include(router.urls)),
-
+    path('', include(router.urls)),
+    path('product/<int:pk>', api.ProductVariantRetrieveAPIView.as_view()),
+    path('products/', api.ProductListAPIView.as_view()),
 )
+

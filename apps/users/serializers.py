@@ -23,7 +23,7 @@ class ResentViewSerializer(serializers.ModelSerializer):
         ]
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserRetrieveAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = [
