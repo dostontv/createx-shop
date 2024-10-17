@@ -12,6 +12,7 @@ router = routers.DefaultRouter()
 urlpatterns = (
     path("", include(router.urls)),
     path('User/me/', api.UserRetrieveAPIView.as_view()),
+    path('User/add/', api.UserCreateAPIView.as_view()),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

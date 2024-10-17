@@ -37,7 +37,7 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 @extend_schema(tags=['User'])
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = models.User.objects.all()
-    serializer_class = serializers.UserSerializer
+    serializer_class = serializers.UserCreateSerializer
 
 
 

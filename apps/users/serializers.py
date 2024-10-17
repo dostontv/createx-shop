@@ -35,6 +35,21 @@ class UserRetrieveAPISerializer(serializers.ModelSerializer):
         ]
 
 
+class UserCreateSerializer(serializers.ModelSerializer):
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = models.User
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+        ]
+
+
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Review
