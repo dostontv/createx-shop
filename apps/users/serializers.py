@@ -86,7 +86,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             "content",
             "created",
             "rating",
-            "user_id",
+            "user_id"
         ]
 
 

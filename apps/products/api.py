@@ -13,8 +13,8 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Category class"""
 
     queryset = models.Category.objects.all()
-    serializer_class = serializers.CategorySerializer
-    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = serializers.CategoryDetailSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 @extend_schema(tags=['Colors'])

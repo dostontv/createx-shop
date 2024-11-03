@@ -146,7 +146,6 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Hala Madrid',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
 }
 
 MEDIA_URL = '/media/'
