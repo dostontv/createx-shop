@@ -8,7 +8,8 @@ router.register('Category', api.CategoryViewSet)
 
 urlpatterns = (
     path('', include(router.urls)),
-    path('product/<int:pk>', api.ProductVariantRetrieveAPIView.as_view()),
+    path('product/<int:pk>', api.ProductRetrieveAPIView.as_view()),
+    path('productvariant/<int:pk>', api.ProductVariantRetrieveAPIView.as_view()),
     path('products/', api.ProductListAPIView.as_view()),
 )
 

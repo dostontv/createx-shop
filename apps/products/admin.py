@@ -115,8 +115,20 @@ class SizeAdmin(admin.ModelAdmin):
     ]
 
 
+class BrandsAdmin(admin.ModelAdmin):
+    search_fields = 'name',
+    list_display = ['name']
+
+
+class MaterialsAdmin(admin.ModelAdmin):
+    search_fields = 'name',
+    list_display = ['name']
+
+
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Color, ColorAdmin)
 admin.site.register(models.Product, ProductAdmin)
 admin.site.register(models.ProductVariant, ProductVariantAdmin)
 admin.site.register(models.Size, SizeAdmin)
+admin.site.register(models.Brand, BrandsAdmin)
+admin.site.register(models.Material, MaterialsAdmin)

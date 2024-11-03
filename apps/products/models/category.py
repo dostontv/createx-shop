@@ -11,6 +11,8 @@ class Category(MPTTModel):
 
     class Meta:
         db_table = 'categories'
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
 
     class MPTTMeta:
         order_insertion_by = ['name']
