@@ -31,24 +31,24 @@ class ProductSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
 
         data['category'] = CategorySerializer(instance.category).data
+        variants = list(instance.variants.all())
+        i = 0
+        while i < len(variants):
+            variants[i] = ProductVariantSerializer(variants[i]).data
+            i += 1
+
+        data['variants'] = variants
         return data
 
 
-class SubcategorySerializer(serializers.ModelSerializer):
-    product_count = serializers.IntegerField(source='products.count', read_only=True)
-
-    class Meta:
-        model = models.Category
-        fields = ['id', 'name', 'product_count']
-
-
 class CategoryDetailSerializer(serializers.ModelSerializer):
-    subcategories = SubcategorySerializer(many=True)
     products = ProductSerializer(many=True)
+    product_count = serializers.IntegerField()
+
 
     class Meta:
         model = models.Category
-        fields = ['id', 'name', 'childrens', 'products']
+        fields = ['id', 'name', 'products', 'product_count']
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -86,6 +86,17 @@ class ProductVariantSerializer(serializers.ModelSerializer):
             "created",
             "last_updated",
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        content = []
+        for con in instance.content.all():
+            content.append({"url" : con.content.url})
+        return data
+
+
+
+
 
 
 class SizeSerializer(serializers.ModelSerializer):

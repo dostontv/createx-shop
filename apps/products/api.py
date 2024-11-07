@@ -1,6 +1,7 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from django.db.models import Count
 
 from . import filters
 from . import models
@@ -12,7 +13,7 @@ from .pagination import CustomCursorPagination
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Category class"""
 
-    queryset = models.Category.objects.all()
+    queryset = models.Category.objects.annotate(product_count=Count('products'))
     serializer_class = serializers.CategoryDetailSerializer
     permission_classes = [permissions.AllowAny]
 
