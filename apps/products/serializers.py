@@ -45,7 +45,6 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
     product_count = serializers.IntegerField()
 
-
     class Meta:
         model = models.Category
         fields = ['id', 'name', 'products', 'product_count']
@@ -91,12 +90,8 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         content = []
         for con in instance.content.all():
-            content.append({"url" : con.content.url})
+            content.append({"url": con.content.url})
         return data
-
-
-
-
 
 
 class SizeSerializer(serializers.ModelSerializer):
