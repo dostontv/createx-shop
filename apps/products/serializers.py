@@ -41,6 +41,19 @@ class ProductSerializer(serializers.ModelSerializer):
         return data
 
 
+
+class ProductRetrieveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Product
+        fields = [
+            "id",
+            "name",
+            "views",
+        ]
+
+
+
+
 class CategoryDetailSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
     product_count = serializers.IntegerField()

@@ -40,7 +40,7 @@ class ProductRetrieveAPIView(RetrieveAPIView):
     """ViewSet for the ProductVariant class"""
 
     queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductSerializer
+    serializer_class = serializers.ProductRetrieveSerializer
 
 @extend_schema(tags=['Products'])
 class ProductVariantRetrieveAPIView(RetrieveAPIView):
