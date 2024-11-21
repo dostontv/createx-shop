@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from mptt.admin import DraggableMPTTAdmin
 
 from . import models
 
 
-class CategoryAdmin(DraggableMPTTAdmin):
+class CategoryAdmin(TranslationAdmin, DraggableMPTTAdmin):
     search_fields = 'name',
     mptt_indent_field = 'name'
     list_display = ('tree_actions', 'indented_title',
@@ -59,7 +60,7 @@ class ProductAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     form = ProductAdminForm
     search_fields = 'name',
     list_display = [
