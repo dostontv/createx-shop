@@ -48,6 +48,9 @@ class Material(models.Model):
     class Meta:
         db_table = 'materials'
 
+    def __str__(self):
+        return f'{self.id} - ' + self.name
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=30)
@@ -56,3 +59,6 @@ class Brand(models.Model):
 
     class Meta:
         db_table = 'brands'
+
+    def __str__(self):
+        return f'{self.id} - ' + self.name

@@ -42,6 +42,15 @@ class ProductRetrieveAPIView(RetrieveAPIView):
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductRetrieveSerializer
 
+    def get(self, request, *args, **kwargs):
+        product = self.get_object()
+        if product:
+            product.views += 1
+            product.save()
+
+        return super().get(request, *args, **kwargs)
+
+
 @extend_schema(tags=['Products'])
 class ProductVariantRetrieveAPIView(RetrieveAPIView):
     """ViewSet for the ProductVariant class"""

@@ -1,3 +1,4 @@
+from modeltranslation.fields import TranslationField
 from rest_framework import serializers
 
 from . import models
@@ -14,7 +15,7 @@ class CategorySerializer(serializers.ModelSerializer):
         ]
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = [
@@ -41,8 +42,7 @@ class ProductSerializer(serializers.ModelSerializer):
         return data
 
 
-
-class ProductRetrieveSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = [
@@ -50,8 +50,6 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
             "name",
             "views",
         ]
-
-
 
 
 class CategoryDetailSerializer(serializers.ModelSerializer):
@@ -95,8 +93,9 @@ class ProductVariantSerializer(serializers.ModelSerializer):
             "product",
             "color",
             "size",
+            "brand",
+            "material",
             "created",
-            "last_updated",
         ]
 
     def to_representation(self, instance):
@@ -104,6 +103,14 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         content = []
         for con in instance.content.all():
             content.append({"url": con.content.url})
+
+        data['content'] = content
+        data['color'] = {"id": instance.color.id, "name": instance.color.name}
+        data['size'] = {"id": instance.size.id, "name": instance.size.name}
+        data['product'] = ProductSerializer(instance.product).data
+        data['brand'] = {"id": instance.brand.id, "name": instance.brand.name}
+        data['material'] = {"id": instance.material.id, "name": instance.material.name}
+
         return data
 
 
@@ -111,6 +118,7 @@ class SizeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Size
         fields = [
+            'id',
             "name",
             "last_updated",
             "created",
