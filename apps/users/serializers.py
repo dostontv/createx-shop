@@ -73,9 +73,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-
-
-
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Review
@@ -88,5 +85,3 @@ class ReviewSerializer(serializers.ModelSerializer):
             "rating",
             "user_id"
         ]
-
-
