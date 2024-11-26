@@ -40,7 +40,6 @@ class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = serializers.UserCreateSerializer
 
 
-
 @extend_schema(tags=['Review'])
 class ReviewViewSet(viewsets.ModelViewSet):
     """ViewSet for the Review class"""
