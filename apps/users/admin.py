@@ -41,8 +41,8 @@ class UserAdminForm(forms.ModelForm):
 class UserAdmin(admin.ModelAdmin):
     form = UserAdminForm
     list_display = [
-        "last_updated",
-        "created",
+        "id",
+        "first_name",
     ]
 
 
@@ -55,7 +55,6 @@ class ReviewAdminForm(forms.ModelForm):
 class ReviewAdmin(admin.ModelAdmin):
     form = ReviewAdminForm
     list_display = [
-        "last_updated",
         "name",
         "content",
         "created",
