@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Createx-shop Project API',
-    'DESCRIPTION': 'Hala Madrid',
+    'DESCRIPTION': '4th Group\'s Project API',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }

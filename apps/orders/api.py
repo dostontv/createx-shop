@@ -133,4 +133,5 @@ class OrderItemUpdateView(generics.UpdateAPIView):
 class OrderItemDeleteView(generics.DestroyAPIView):
     """Delete an order item."""
     queryset = models.OrderItem.objects.all()
+    serializer_class = serializers.OrderItemListSerializer
     permission_classes = [IsAuthenticated]
