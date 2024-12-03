@@ -1,11 +1,15 @@
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions, generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from . import models
 from . import serializers
+from .tokens import account_activation_token
 
 
-# List View for Favourites
 @extend_schema(tags=['Favourite'])
 class FavouriteListAPIView(generics.ListAPIView):
     queryset = models.Favourite.objects.all()
@@ -138,3 +142,19 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.Review.objects.all()
     serializer_class = serializers.ReviewSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+
+class VerifyEmailConfirm(APIView):
+    def get(self, request, uidb64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = models.User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, models.User.DoesNotExist):
+            user = None
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return Response({"Your email has been verified"})
+        else:
+            return Response({"message" : "The link is invalid"})

@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from . import api
-
+from .api import VerifyEmailConfirm
 
 router = routers.DefaultRouter()
 
@@ -13,10 +13,10 @@ urlpatterns = (
     path("", include(router.urls)),
     path('User/me/', api.UserRetrieveAPIView.as_view()),
     path('User/add/', api.UserCreateAPIView.as_view()),
+    path('verify-email-confirm/<uidb64>/<token>', VerifyEmailConfirm.as_view(), name='verify-email-confirm'),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
 
     path('favourites/', api.FavouriteListAPIView.as_view(), name='favourite-list'),
     path('favourites/create/', api.FavouriteCreateAPIView.as_view(), name='favourite-create'),
