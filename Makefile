@@ -22,3 +22,6 @@ super:
 
 celery:
 	celery -A root worker --loglevel=INFO
+
+req:
+	poetry export --without-hashes --format=requirements.txt > requirements.txt
