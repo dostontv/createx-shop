@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=250)
     category = TreeForeignKey('products.Category', models.CASCADE, 'products')
     description = HTMLField()
     views = models.IntegerField(default=0)
