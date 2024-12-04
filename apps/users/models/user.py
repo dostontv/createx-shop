@@ -17,6 +17,9 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'users'
+        unique_together = [
+            ('email', 'is_active')
+        ]
 
     def __str__(self):
         return str(self.pk)

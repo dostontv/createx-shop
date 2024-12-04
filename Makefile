@@ -19,3 +19,6 @@ delmig:
 
 super:
 	python3 manage.py createsuperuser
+
+celery:
+	celery -A root worker --loglevel=INFO

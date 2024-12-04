@@ -3,18 +3,14 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from . import models
+from .utils import generate_one_time_verification
 
-from rest_framework import serializers
-from . import models
 
-# Favourite Serializers
-
-# Serializer for listing Favourite objects (only necessary fields for list view)
 class FavouriteListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Favourite
         fields = [
-            "product_variant",  # Only include fields that make sense in the list view
+            "product_variant",
             "user",
         ]
 
@@ -24,7 +20,7 @@ class FavouriteCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Favourite
         fields = [
-            "product_variant",  # Include all fields required for creation
+            "product_variant",
             "user",
         ]
 
@@ -34,7 +30,7 @@ class FavouriteRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Favourite
         fields = [
-            "product_variant",  # All fields you want to show in a detailed view
+            "product_variant",
             "user",
             "created",
         ]
@@ -95,7 +91,6 @@ class ResentViewUpdateSerializer(serializers.ModelSerializer):
         ]
 
 
-
 class UserRetrieveAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
@@ -136,12 +131,19 @@ class UserCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password1')
         validated_data.pop('password2')
+        request = validated_data.pop('request')
 
         user = models.User.objects.create(**validated_data)
         user.set_password(password)
+        user.is_active = False
         user.save()
 
+        if request:
+            generate_one_time_verification(request, user)
+
         return user
+
+
 
 
 class ReviewSerializer(serializers.ModelSerializer):

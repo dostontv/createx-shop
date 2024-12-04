@@ -50,6 +50,7 @@ class CartDeleteView(generics.DestroyAPIView):
     # check user's Cart
     queryset = models.Cart.objects.all()
     permission_classes = [IsAuthenticated]
+    serializer_class = serializers.CartListSerializer
 
 
 # Order Views
@@ -94,6 +95,7 @@ class OrderDeleteView(generics.DestroyAPIView):
     """Delete an order."""
     queryset = models.Order.objects.all()
     permission_classes = [IsAuthenticated]
+    serializer_class = serializers.OrderListSerializer
 
 
 # OrderItem Views

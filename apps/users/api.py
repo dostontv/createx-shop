@@ -114,6 +114,7 @@ class ResentViewDeleteAPIView(generics.DestroyAPIView):
     queryset = models.ResentView.objects.all()
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.ResentViewListSerializer
+
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
@@ -134,6 +135,10 @@ class UserCreateAPIView(generics.CreateAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserCreateSerializer
 
+    def perform_create(self, serializer):
+        serializer.validated_data['request'] = self.request
+        super().perform_create(serializer)
+
 
 @extend_schema(tags=['Review'])
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -142,7 +147,6 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.Review.objects.all()
     serializer_class = serializers.ReviewSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 
 class VerifyEmailConfirm(APIView):
@@ -157,4 +161,4 @@ class VerifyEmailConfirm(APIView):
             user.save()
             return Response({"Your email has been verified"})
         else:
-            return Response({"message" : "The link is invalid"})
+            return Response({"message": "The link is invalid"})
