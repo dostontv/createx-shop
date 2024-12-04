@@ -4,7 +4,7 @@ from django.db import models
 class ProductVariant(models.Model):
     price = models.FloatField()
     quantity = models.SmallIntegerField()
-    size = models.ForeignKey('products.Size', models.CASCADE)
+    size = models.ForeignKey('products.Size', models.CASCADE, null=True, blank=True)
     color = models.ForeignKey('products.Color', models.CASCADE)
     material = models.ForeignKey('products.Material', models.SET_NULL, blank=True, null=True)
     brand = models.ForeignKey('products.Brand', models.SET_NULL, blank=True, null=True)

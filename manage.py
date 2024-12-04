@@ -2,6 +2,10 @@
 import os
 import sys
 
+# from create_fake_data.create_categories import create_categories
+
+# from create_fake_data.create_products import create_product_
+# from create_fake_data.create_variants import create_product_variants
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'root.settings')
     try:
