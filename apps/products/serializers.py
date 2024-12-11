@@ -51,6 +51,20 @@ class ProductSerializer(serializers.ModelSerializer):
             "views",
         ]
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        images = []
+        for variant in instance.variants.all():
+            for content in variant.content.all():
+                content_url = content.content.url
+                i = 0
+                if (j := content_url.find('https')) >= 0:
+                    i = j
+                images.append(content_url[i:])
+
+        data['images'] = images
+        return data
+
 
 class CategoryDetailSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
@@ -102,7 +116,11 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         content = []
         for con in instance.content.all():
-            content.append({"url": con.content.url})
+            content_url = con.content.url
+            i = 0
+            if (j := content_url.find('https')) >= 0:
+                i = j
+            content.append({"url": content_url[i:]})
 
         data['content'] = content
         data['color'] = {"id": instance.color.id, "name": instance.color.name}
