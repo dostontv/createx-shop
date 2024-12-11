@@ -15,6 +15,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www//var/www/createx-shop/
+            cd /var/www/createx-shop/
             git pull
             systemctl restart createx.service
