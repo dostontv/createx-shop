@@ -9,6 +9,6 @@ class Command(BaseCommand):
         self.stdout.write("Creating fake products...")
 
         # Productlarni yaratish
-        create_product_()
+        # create_product_()
 
         self.stdout.write(self.style.SUCCESS("Successfully created 1000 fake products"))

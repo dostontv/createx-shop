@@ -14,7 +14,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Category class"""
 
     queryset = models.Category.objects.annotate(product_count=Count('products'))
-    serializer_class = serializers.CategoryDetailSerializer
+    serializer_class = serializers.CategorySerializer
     permission_classes = [permissions.AllowAny]
 
 
