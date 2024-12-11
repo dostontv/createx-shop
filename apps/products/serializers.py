@@ -106,12 +106,12 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
         data['content'] = content
         data['color'] = {"id": instance.color.id, "name": instance.color.name}
-        if hasattr(instance, "size"):
+        if hasattr(instance, "size") and hasattr(instance.size, "id"):
             data['size'] = {"id": instance.size.id, "name": instance.size.name}
         data['product'] = ProductSerializer(instance.product).data
-        if hasattr(instance, "brand"):
+        if hasattr(instance, "brand") and hasattr(instance.brand, "id"):
             data['brand'] = {"id": instance.brand.id, "name": instance.brand.name}
-        if hasattr(instance, "material"):
+        if hasattr(instance, "material") and hasattr(instance.material, "id"):
             data['material'] = {"id": instance.material.id, "name": instance.material.name}
 
         return data
