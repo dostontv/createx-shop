@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from create_fake_data.create_products import create_product_
+# from create_fake_data.create_products import create_product_
 
 
 class Command(BaseCommand):
