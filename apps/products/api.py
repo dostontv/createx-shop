@@ -28,9 +28,9 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @extend_schema(tags=['Products'])
-class ProductListAPIView(ListAPIView):
-    queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductSerializer
+class ProductVariantListAPIView(ListAPIView):
+    queryset = models.ProductVariant.objects.all()
+    serializer_class = serializers.ProductVariantListSerializer
     filterset_class = filters.ProductFilter
     pagination_class = CustomCursorPagination
 

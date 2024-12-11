@@ -1,4 +1,3 @@
-from modeltranslation.fields import TranslationField
 from rest_framework import serializers
 
 from . import models
@@ -51,18 +50,26 @@ class ProductSerializer(serializers.ModelSerializer):
             "views",
         ]
 
+
+class ProductVariantListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProductVariant
+        fields = [
+            "id",
+            "price",
+        ]
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        images = []
-        for variant in instance.variants.all():
-            for content in variant.content.all():
-                content_url = content.content.url
-                i = 0
-                if (j := content_url.find('https')) >= 0:
-                    i = j
-                images.append(content_url[i:])
-
-        data['images'] = images
+        content = []
+        for con in instance.content.all():
+            content_url = con.content.url
+            i = 0
+            if (j := content_url.find('https')) >= 0:
+                i = j
+            content.append({"url": content_url[i:]})
+        data['content'] = content
+        data['product'] = ProductSerializer(instance.product).data
         return data
 
 

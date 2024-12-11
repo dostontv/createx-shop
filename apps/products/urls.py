@@ -10,6 +10,6 @@ urlpatterns = (
     path('', include(router.urls)),
     path('product/<int:pk>', api.ProductRetrieveAPIView.as_view()),
     path('productvariant/<int:pk>', api.ProductVariantRetrieveAPIView.as_view()),
-    path('products/', api.ProductListAPIView.as_view()),
+    path('productVariants/', api.ProductVariantListAPIView.as_view()),
 )
 
