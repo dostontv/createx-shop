@@ -1,0 +1,20 @@
+name: Drf 4th Group CI/CD Deployment
+
+on:
+  push:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using ssh-key
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www//var/www/createx-shop/
+            git pull
+            systemctl restart createx.service
