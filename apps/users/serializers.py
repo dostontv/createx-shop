@@ -104,36 +104,38 @@ class UserRetrieveAPISerializer(serializers.ModelSerializer):
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
-    password1 = serializers.CharField(write_only=True)
-    password2 = serializers.CharField(write_only=True)
+    full_name = serializers.CharField()
 
     class Meta:
         model = models.User
         fields = [
-            "first_name",
-            "last_name",
+            "full_name",
             "email",
-            "password1",
-            "password2",
+            "password",
         ]
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
     def validate(self, data):
-        if data['password1'] != data['password2']:
-            raise serializers.ValidationError("Passwords do not match.")
-
         try:
-            validate_password(data['password1'])
+            validate_password(data['password'])
         except ValidationError as e:
-            raise serializers.ValidationError({"password1": list(e.messages)})
+            raise serializers.ValidationError({"password": list(e.messages)})
 
         return data
 
     def create(self, validated_data):
-        password = validated_data.pop('password1')
-        validated_data.pop('password2')
+        full_name = validated_data.pop('full_name')
+        password = validated_data.pop('password')
         request = validated_data.pop('request')
 
+        full_name = full_name.split()
+
         user = models.User.objects.create(**validated_data)
+        user.first_name = full_name[0]
+        if len(full_name) > 1:
+            user.last_name = full_name[1]
         user.set_password(password)
         user.is_active = False
         user.save()
@@ -141,9 +143,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         if request:
             generate_one_time_verification(request, user)
 
+        user.full_name = ' '.join(full_name)
         return user
-
-
 
 
 class ReviewSerializer(serializers.ModelSerializer):
