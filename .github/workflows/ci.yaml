@@ -21,3 +21,4 @@ jobs:
             pip3 install -r requirements.txt 
             make mig
             systemctl restart createx.service
+            systemctl restart createx-celery.service

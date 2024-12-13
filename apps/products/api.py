@@ -33,6 +33,8 @@ class ProductVariantListAPIView(ListAPIView):
     serializer_class = serializers.ProductVariantListSerializer
     filterset_class = filters.ProductFilter
     pagination_class = CustomCursorPagination
+    ordering_fields = ['product__views', 'created']
+    ordering = ['created']
 
 
 @extend_schema(tags=['Products'])
