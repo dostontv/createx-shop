@@ -9,7 +9,7 @@ class User(AbstractUser):
     username_validator = None
     username = None
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15, unique=True, null=True, db_default="+998")
+    phone_number = models.CharField(max_length=15, unique=True, null=True)
     country = models.CharField(max_length=50, null=True, db_default="")
     city = models.CharField(max_length=50, null=True, db_default="")
     address = models.TextField(null=True, db_default="")
