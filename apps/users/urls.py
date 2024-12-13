@@ -13,6 +13,8 @@ urlpatterns = (
     path("", include(router.urls)),
     path('User/me/', api.UserRetrieveAPIView.as_view()),
     path('User/add/', api.UserCreateAPIView.as_view()),
+    path('User/update/', api.UserUpdateAPIView.as_view()),
+    path('User/delete/', api.UserDestroyAPIView.as_view()),
     path('verify-email-confirm/<uidb64>/<token>', VerifyEmailConfirm.as_view(), name='verify-email-confirm'),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

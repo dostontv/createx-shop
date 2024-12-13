@@ -131,6 +131,26 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 
 
 @extend_schema(tags=['User'])
+class UserUpdateAPIView(generics.UpdateAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserRetrieveAPISerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        self.kwargs['pk'] = self.request.user.id
+        return super().get_object()
+
+@extend_schema(tags=['User'])
+class UserDestroyAPIView(generics.DestroyAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserDestroyAPISerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        self.kwargs['pk'] = self.request.user.id
+        return super().get_object()
+
+@extend_schema(tags=['User'])
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserCreateSerializer
@@ -150,6 +170,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class VerifyEmailConfirm(APIView):
+    serializer_class = serializers.VerifyEmailConfirmSerializer
+
     def get(self, request, uidb64, token):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))

@@ -98,10 +98,19 @@ class UserRetrieveAPISerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
+            "phone_number",
+            "country",
+            "city",
+            "address",
+            "zip_code",
             "last_updated",
             "created",
         ]
 
+class UserDestroyAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = []
 
 class UserCreateSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField()
@@ -159,3 +168,9 @@ class ReviewSerializer(serializers.ModelSerializer):
             "rating",
             "user_id"
         ]
+
+
+class VerifyEmailConfirmSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = []
