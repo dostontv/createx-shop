@@ -1,3 +1,5 @@
+from urllib.parse import unquote
+
 from rest_framework import serializers
 
 from . import models
@@ -73,9 +75,9 @@ class ProductVariantListSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         content = []
         for con in instance.content.all():
-            content_url = con.content.url
+            content_url = unquote(con.content.url)
             i = 0
-            if (j := content_url.find('https')) >= 0:
+            if (j := content_url.find('https://')) >= 0:
                 i = j
             content.append({"url": content_url[i:]})
         data['content'] = content
@@ -134,9 +136,9 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         content = []
         for con in instance.content.all():
-            content_url = con.content.url
+            content_url = unquote(con.content.url)
             i = 0
-            if (j := content_url.find('https')) >= 0:
+            if (j := content_url.find('https://')) >= 0:
                 i = j
             content.append({"url": content_url[i:]})
 
