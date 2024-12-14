@@ -77,7 +77,7 @@ class ProductVariantListSerializer(serializers.ModelSerializer):
         for con in instance.content.all():
             content_url = unquote(con.content.url)
 
-            if content_url.startswith("https:/") and not content_url.startswith("https://"):
+            if content_url.find("https:/") > -1 and content_url.find("https://") < 0:
                 content_url = content_url.replace("https:/", "https://")
             i = 0
             if (j := content_url.find('https')) >= 0:
@@ -141,7 +141,7 @@ class ProductVariantSerializer(serializers.ModelSerializer):
         for con in instance.content.all():
             content_url = unquote(con.content.url)
 
-            if content_url.startswith("https:/") and not content_url.startswith("https://"):
+            if content_url.find("https:/") > -1 and content_url.find("https://") < 0:
                 content_url = content_url.replace("https:/", "https://")
             i = 0
             if (j := content_url.find('https')) >= 0:
