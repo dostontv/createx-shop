@@ -31,7 +31,7 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 
 @extend_schema(tags=['Products'])
 class ProductVariantListAPIView(ListAPIView):
-    queryset = models.ProductVariant.objects.select_related('product')
+    queryset = models.ProductVariant.objects.select_related('product').all()
     serializer_class = serializers.ProductVariantListSerializer
     # filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = filters.ProductFilter
