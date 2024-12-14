@@ -1,3 +1,4 @@
+from html import unescape
 from urllib.parse import unquote
 
 from rest_framework import serializers
@@ -42,7 +43,8 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-
+        if data.get('name'):
+            data["name"] = unescape(data["name"])
         data['category'] = CategoryRetrieveSerializer(instance.category).data
         variants = list(instance.variants.all())
         i = 0
@@ -61,6 +63,13 @@ class ProductSerializer(serializers.ModelSerializer):
             "id",
             "name",
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if data.get('name'):
+            data["name"] = unescape(data["name"])
+
+        return data
 
 
 class ProductVariantListSerializer(serializers.ModelSerializer):
