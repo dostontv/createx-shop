@@ -1,9 +1,7 @@
-from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Count
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
-from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from django.db.models import Count
 
 from . import filters
 from . import models
@@ -31,34 +29,32 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 
 @extend_schema(tags=['Products'])
 class ProductVariantListAPIView(ListAPIView):
-    queryset = models.ProductVariant.objects.select_related('product').all()
+    queryset = models.ProductVariant.objects.all()
     serializer_class = serializers.ProductVariantListSerializer
     # filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = filters.ProductFilter
     pagination_class = CustomCursorPagination
-    ordering_fields = ['product__views', 'created']
+    ordering_fields = ['views', 'created']
     ordering = ['created']
 
 
 @extend_schema(tags=['Products'])
 class ProductRetrieveAPIView(RetrieveAPIView):
-
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductRetrieveSerializer
-
-    def get(self, request, *args, **kwargs):
-        product = self.get_object()
-        if product:
-            product.views += 1
-            product.save()
-
-        return super().get(request, *args, **kwargs)
 
 
 @extend_schema(tags=['Products'])
 class ProductVariantRetrieveAPIView(RetrieveAPIView):
     queryset = models.ProductVariant.objects.all()
     serializer_class = serializers.ProductVariantSerializer
+
+    def get(self, request, *args, **kwargs):
+        product_variant = self.get_object()
+        if product_variant:
+            product_variant.views += 1
+            product_variant.save()
+        return super().get(request, *args, **kwargs)
 
 
 @extend_schema(tags=['Size'])

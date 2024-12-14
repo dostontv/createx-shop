@@ -7,7 +7,6 @@ class Product(models.Model):
     name = models.CharField(max_length=250)
     category = TreeForeignKey('products.Category', models.CASCADE, 'products')
     description = HTMLField()
-    views = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 

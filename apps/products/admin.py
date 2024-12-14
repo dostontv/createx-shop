@@ -66,7 +66,6 @@ class ProductAdmin(TranslationAdmin):
     list_display = [
         'name',
         'category',
-        'views',
         'created',
         'last_updated',
     ]
@@ -96,6 +95,7 @@ class ProductVariantAdmin(admin.ModelAdmin):
         'price',
         'product',
         'size',
+        'views',
         'created',
         'last_updated',
     ]

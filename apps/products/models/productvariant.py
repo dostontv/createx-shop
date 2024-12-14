@@ -9,6 +9,7 @@ class ProductVariant(models.Model):
     material = models.ForeignKey('products.Material', models.SET_NULL, blank=True, null=True)
     brand = models.ForeignKey('products.Brand', models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey('products.Product', models.CASCADE, "variants")
+    views = models.IntegerField(db_default=0)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
 

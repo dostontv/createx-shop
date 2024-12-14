@@ -22,7 +22,6 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "category",
-            "views",
             "created",
             "last_updated",
         ]
@@ -47,7 +46,6 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "views",
         ]
 
 
@@ -116,6 +114,7 @@ class ProductVariantSerializer(serializers.ModelSerializer):
             "size",
             "brand",
             "material",
+            "views",
             "created",
         ]
 
