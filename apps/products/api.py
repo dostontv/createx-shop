@@ -33,7 +33,7 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 class ProductVariantListAPIView(ListAPIView):
     queryset = models.ProductVariant.objects.select_related('product')
     serializer_class = serializers.ProductVariantListSerializer
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    # filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = filters.ProductFilter
     pagination_class = CustomCursorPagination
     ordering_fields = ['product__views', 'created']
