@@ -3,15 +3,27 @@ from rest_framework import serializers
 from . import models
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategoryRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
         fields = [
             "id",
             "name",
-            "created",
-            "last_updated",
+            'created',
+            'last_updated',
         ]
+
+
+class CategoryListSerializer(serializers.ModelSerializer):
+    children = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Category
+        fields = ('id', 'name', 'children')
+
+    def get_children(self, obj):
+        if obj.get_children():
+            return CategoryListSerializer(obj.get_children(), many=True).data
 
 
 class ProductRetrieveSerializer(serializers.ModelSerializer):
@@ -29,7 +41,7 @@ class ProductRetrieveSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
 
-        data['category'] = CategorySerializer(instance.category).data
+        data['category'] = CategoryRetrieveSerializer(instance.category).data
         variants = list(instance.variants.all())
         i = 0
         while i < len(variants):

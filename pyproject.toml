@@ -23,6 +23,8 @@ celery = "^5.4.0"
 redis = "^5.2.0"
 faker = "^33.1.0"
 django-cors-headers = "^4.6.0"
+fuzzywuzzy = "^0.18.0"
+translate = "^3.6.1"
 
 
 [build-system]

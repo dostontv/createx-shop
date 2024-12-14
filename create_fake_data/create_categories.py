@@ -42,26 +42,20 @@
 #
 #
 # def create_categories(data=data1, parent=None):
-#
 #     for category_name, subcategories in data.items():
-#         category, _ = Category.objects.get_or_create(
+#         category = Category.objects.create(
 #             name=category_name,
-#             defaults={
-#                 "name_ru": category_name,
-#                 "name_uz": category_name,
-#                 "parent": parent
-#             }
+#             name_ru=category_name,
+#             name_uz=category_name,
+#             parent=parent
 #         )
 #         if isinstance(subcategories, dict):
 #             create_categories(subcategories, category)
 #         elif isinstance(subcategories, list):
 #             for subcategory in subcategories:
-#                 Category.objects.get_or_create(
+#                 Category.objects.create(
 #                     name=subcategory["en"],
-#                     defaults={
-#                         "name_ru": subcategory["ru"],
-#                         "name_uz": subcategory["uz"],
-#                         "parent": category
-#                     }
+#                     name_ru=subcategory["ru"],
+#                     name_uz=subcategory["uz"],
+#                     parent=category
 #                 )
-#

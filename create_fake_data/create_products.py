@@ -38,6 +38,8 @@
 #
 #
 # fake = Faker()
+# fake_uz = Faker('uz_UZ')
+# fake_ru = Faker('ru_RU')
 # clothing_names = [
 #     'Shirt',
 #     'Jeans',
@@ -96,9 +98,11 @@
 #     product_name = choice(clothing_names)
 #
 #     name_uz, name_ru = translate_text(product_name)
+#     if name_ru.startswith("MYMEMORY WARNING:"):
+#         name_uz, name_ru = fake_uz.word(), fake_ru.word()
 #
 #     description_en = fake.text()
-#     description_uz, description_ru = translate_text(description_en)
+#     description_uz, description_ru = fake_uz.text(), fake_ru.text()
 #
 #     category_id = find_matching_category(product_name)
 #
@@ -110,7 +114,6 @@
 #         description_uz=description_uz,
 #         description_ru=description_ru,
 #         category_id=category_id,
-#         views=fake.random_int(min=0, max=1000)
 #     )
 #     product.save()
 #

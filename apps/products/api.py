@@ -10,12 +10,15 @@ from .pagination import CustomCursorPagination
 
 
 @extend_schema(tags=['Categories'])
-class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet for the Category class"""
+class CategoryListAPIView(ListAPIView):
+    queryset = models.Category.objects.filter(parent=None)
+    serializer_class = serializers.CategoryListSerializer
 
-    queryset = models.Category.objects.annotate(product_count=Count('products'))
-    serializer_class = serializers.CategorySerializer
-    permission_classes = [permissions.AllowAny]
+
+@extend_schema(tags=['Categories'])
+class CategoryRetrieveAPIView(RetrieveAPIView):
+    queryset = models.Category.objects.all()
+    serializer_class = serializers.CategoryRetrieveSerializer
 
 
 @extend_schema(tags=['Colors'])
@@ -28,6 +31,12 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 @extend_schema(tags=['Products'])
+class ProductRetrieveAPIView(RetrieveAPIView):
+    queryset = models.Product.objects.all()
+    serializer_class = serializers.ProductRetrieveSerializer
+
+
+@extend_schema(tags=['Products'])
 class ProductVariantListAPIView(ListAPIView):
     queryset = models.ProductVariant.objects.all()
     serializer_class = serializers.ProductVariantListSerializer
@@ -36,12 +45,6 @@ class ProductVariantListAPIView(ListAPIView):
     pagination_class = CustomCursorPagination
     ordering_fields = ['views', 'created']
     ordering = ['created']
-
-
-@extend_schema(tags=['Products'])
-class ProductRetrieveAPIView(RetrieveAPIView):
-    queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductRetrieveSerializer
 
 
 @extend_schema(tags=['Products'])
