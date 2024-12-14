@@ -1,5 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, permissions
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from django.db.models import Count
 
@@ -31,6 +33,7 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
 class ProductVariantListAPIView(ListAPIView):
     queryset = models.ProductVariant.objects.all()
     serializer_class = serializers.ProductVariantListSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = filters.ProductFilter
     pagination_class = CustomCursorPagination
     ordering_fields = ['product__views', 'created']
