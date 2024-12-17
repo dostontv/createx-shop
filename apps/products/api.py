@@ -30,7 +30,7 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-@extend_schema(tags=['Colors'])
+@extend_schema(tags=['Brands'])
 class BrandViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Brand class"""
 
@@ -39,7 +39,7 @@ class BrandViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-@extend_schema(tags=['Colors'])
+@extend_schema(tags=['Materials'])
 class MaterialViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for the Material class"""
 
