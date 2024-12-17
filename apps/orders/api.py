@@ -9,15 +9,20 @@ from . import serializers
 # Cart Views
 @extend_schema(tags=['Cart'])
 class CartCreateView(generics.CreateAPIView):
-    """Create a new cart."""
     queryset = models.Cart.objects.all()
     serializer_class = serializers.CartCreateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 @extend_schema(tags=['Cart'])
 class CartListView(generics.ListAPIView):
-    """List all carts with optional filters."""
     queryset = models.Cart.objects.all()
     serializer_class = serializers.CartListSerializer
     permission_classes = [IsAuthenticated]
@@ -29,28 +34,37 @@ class CartListView(generics.ListAPIView):
 
 @extend_schema(tags=['Cart'])
 class CartRetrieveView(generics.RetrieveAPIView):
-    """Retrieve a cart."""
     queryset = models.Cart.objects.all()
     serializer_class = serializers.CartRetrieveSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['Cart'])
 class CartUpdateView(generics.UpdateAPIView):
-    """Update an existing cart."""
     # check user's Cart
     queryset = models.Cart.objects.all()
     serializer_class = serializers.CartUpdateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['Cart'])
 class CartDeleteView(generics.DestroyAPIView):
-    """Delete a cart."""
     # check user's Cart
     queryset = models.Cart.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.CartListSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 # Order Views
@@ -61,6 +75,13 @@ class OrderCreateView(generics.CreateAPIView):
     serializer_class = serializers.OrderCreateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 @extend_schema(tags=['Order'])
 class OrderListView(generics.ListAPIView):
@@ -69,9 +90,9 @@ class OrderListView(generics.ListAPIView):
     serializer_class = serializers.OrderListSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        self.queryset = self.get_queryset().filter(user=self.request.user.id)
-        return super().get(request, *args, **kwargs)
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 @extend_schema(tags=['Order'])
@@ -81,6 +102,10 @@ class OrderRetrieveView(generics.RetrieveAPIView):
     serializer_class = serializers.OrderRetrieveSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['Order'])
 class OrderUpdateView(generics.UpdateAPIView):
@@ -89,6 +114,10 @@ class OrderUpdateView(generics.UpdateAPIView):
     serializer_class = serializers.OrderUpdateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['Order'])
 class OrderDeleteView(generics.DestroyAPIView):
@@ -96,6 +125,10 @@ class OrderDeleteView(generics.DestroyAPIView):
     queryset = models.Order.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = serializers.OrderListSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 # OrderItem Views
@@ -106,6 +139,10 @@ class OrderItemCreateView(generics.CreateAPIView):
     serializer_class = serializers.OrderItemCreateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['OrderItem'])
 class OrderItemListView(generics.ListAPIView):
@@ -113,6 +150,10 @@ class OrderItemListView(generics.ListAPIView):
     queryset = models.OrderItem.objects.all()
     serializer_class = serializers.OrderItemListSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 @extend_schema(tags=['OrderItem'])
@@ -122,6 +163,10 @@ class OrderItemRetrieveView(generics.RetrieveAPIView):
     serializer_class = serializers.OrderItemRetrieveSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['OrderItem'])
 class OrderItemUpdateView(generics.UpdateAPIView):
@@ -130,6 +175,10 @@ class OrderItemUpdateView(generics.UpdateAPIView):
     serializer_class = serializers.OrderItemUpdateSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
+
 
 @extend_schema(tags=['OrderItem'])
 class OrderItemDeleteView(generics.DestroyAPIView):
@@ -137,3 +186,7 @@ class OrderItemDeleteView(generics.DestroyAPIView):
     queryset = models.OrderItem.objects.all()
     serializer_class = serializers.OrderItemListSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset

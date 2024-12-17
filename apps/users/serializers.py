@@ -11,7 +11,6 @@ class FavouriteListSerializer(serializers.ModelSerializer):
         model = models.Favourite
         fields = [
             "product_variant",
-            "user",
         ]
 
 
@@ -21,7 +20,6 @@ class FavouriteCreateSerializer(serializers.ModelSerializer):
         model = models.Favourite
         fields = [
             "product_variant",
-            "user",
         ]
 
 
@@ -31,7 +29,6 @@ class FavouriteRetrieveSerializer(serializers.ModelSerializer):
         model = models.Favourite
         fields = [
             "product_variant",
-            "user",
             "created",
         ]
 
@@ -55,7 +52,6 @@ class ResentViewListSerializer(serializers.ModelSerializer):
         model = models.ResentView
         fields = [
             "product_variant",
-            "user",
         ]
 
 
@@ -65,7 +61,6 @@ class ResentViewCreateSerializer(serializers.ModelSerializer):
         model = models.ResentView
         fields = [
             "product_variant",  # All fields needed for creation
-            "user",
         ]
 
 
@@ -75,7 +70,6 @@ class ResentViewRetrieveSerializer(serializers.ModelSerializer):
         model = models.ResentView
         fields = [
             "product_variant",
-            "user",
             "created",
         ]
 
@@ -86,7 +80,6 @@ class ResentViewUpdateSerializer(serializers.ModelSerializer):
         model = models.ResentView
         fields = [
             "product_variant",  # Allow partial updates
-            "user",
             "created",
         ]
 
@@ -107,10 +100,12 @@ class UserRetrieveAPISerializer(serializers.ModelSerializer):
             "created",
         ]
 
+
 class UserDestroyAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = []
+
 
 class UserCreateSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField()

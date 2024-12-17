@@ -11,9 +11,11 @@ class CartCreateSerializer(serializers.ModelSerializer):
         model = models.Cart
         fields = [
             "product_variant",
-            "user",
-            "quantity",  # Allow quantity to be set during creation
+            "quantity",
         ]
+
+    def save(self, **kwargs):
+        return super().save(**kwargs)
 
 
 class CartUpdateSerializer(serializers.ModelSerializer):
@@ -28,14 +30,11 @@ class CartUpdateSerializer(serializers.ModelSerializer):
 
 
 class CartRetrieveSerializer(serializers.ModelSerializer):
-    """Serializer for retrieving cart details."""
-
     class Meta:
         model = models.Cart
         fields = [
             "product_variant",
-            "user",
-            "quantity",  # Include quantity during retrieval
+            "quantity",
             "created",
         ]
 
@@ -45,7 +44,7 @@ class CartListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Cart
-        fields = ['id', 'product_variant', 'user', 'quantity', 'created']
+        fields = ['id', 'product_variant', 'quantity', 'created']
 
 
 # Order Serializers
@@ -63,7 +62,6 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = [
-            "user",
             "status",
             "txn_status",
         ]
@@ -87,7 +85,6 @@ class OrderRetrieveSerializer(serializers.ModelSerializer):
         model = models.Order
         fields = [
             "uid",
-            "user",
             "status",
             "txn_status",
             "created",
