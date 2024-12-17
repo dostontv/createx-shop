@@ -30,6 +30,24 @@ class ColorViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+@extend_schema(tags=['Colors'])
+class BrandViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet for the Brand class"""
+
+    queryset = models.Brand.objects.all()
+    serializer_class = serializers.BrandSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+@extend_schema(tags=['Colors'])
+class MaterialViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet for the Material class"""
+
+    queryset = models.Material.objects.all()
+    serializer_class = serializers.MaterialSerializer
+    permission_classes = [permissions.AllowAny]
+
+
 @extend_schema(tags=['Products'])
 class ProductRetrieveAPIView(RetrieveAPIView):
     queryset = models.Product.objects.all()

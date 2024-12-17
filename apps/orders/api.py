@@ -27,9 +27,9 @@ class CartListView(generics.ListAPIView):
     serializer_class = serializers.CartListSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        self.queryset = self.get_queryset().filter(user=self.request.user.id)
-        return super().get(request, *args, **kwargs)
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        return queryset
 
 
 @extend_schema(tags=['Cart'])
@@ -132,61 +132,61 @@ class OrderDeleteView(generics.DestroyAPIView):
 
 
 # OrderItem Views
-@extend_schema(tags=['OrderItem'])
-class OrderItemCreateView(generics.CreateAPIView):
-    """Create a new order item."""
-    queryset = models.OrderItem.objects.all()
-    serializer_class = serializers.OrderItemCreateSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
-        return queryset
-
-
-@extend_schema(tags=['OrderItem'])
-class OrderItemListView(generics.ListAPIView):
-    """List all order items."""
-    queryset = models.OrderItem.objects.all()
-    serializer_class = serializers.OrderItemListSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
-        return queryset
-
-
-@extend_schema(tags=['OrderItem'])
-class OrderItemRetrieveView(generics.RetrieveAPIView):
-    """Retrieve a specific order item."""
-    queryset = models.OrderItem.objects.all()
-    serializer_class = serializers.OrderItemRetrieveSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
-        return queryset
-
-
-@extend_schema(tags=['OrderItem'])
-class OrderItemUpdateView(generics.UpdateAPIView):
-    """Update an existing order item."""
-    queryset = models.OrderItem.objects.all()
-    serializer_class = serializers.OrderItemUpdateSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
-        return queryset
-
-
-@extend_schema(tags=['OrderItem'])
-class OrderItemDeleteView(generics.DestroyAPIView):
-    """Delete an order item."""
-    queryset = models.OrderItem.objects.all()
-    serializer_class = serializers.OrderItemListSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
-        return queryset
+# @extend_schema(tags=['OrderItem'])
+# class OrderItemCreateView(generics.CreateAPIView):
+#     """Create a new order item."""
+#     queryset = models.OrderItem.objects.all()
+#     serializer_class = serializers.OrderItemCreateSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset().filter(user=self.request.user)
+#         return queryset
+#
+#
+# @extend_schema(tags=['OrderItem'])
+# class OrderItemListView(generics.ListAPIView):
+#     """List all order items."""
+#     queryset = models.OrderItem.objects.all()
+#     serializer_class = serializers.OrderItemListSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset().filter(user=self.request.user)
+#         return queryset
+#
+#
+# @extend_schema(tags=['OrderItem'])
+# class OrderItemRetrieveView(generics.RetrieveAPIView):
+#     """Retrieve a specific order item."""
+#     queryset = models.OrderItem.objects.all()
+#     serializer_class = serializers.OrderItemRetrieveSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset().filter(user=self.request.user)
+#         return queryset
+#
+#
+# @extend_schema(tags=['OrderItem'])
+# class OrderItemUpdateView(generics.UpdateAPIView):
+#     """Update an existing order item."""
+#     queryset = models.OrderItem.objects.all()
+#     serializer_class = serializers.OrderItemUpdateSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset().filter(user=self.request.user)
+#         return queryset
+#
+#
+# @extend_schema(tags=['OrderItem'])
+# class OrderItemDeleteView(generics.DestroyAPIView):
+#     """Delete an order item."""
+#     queryset = models.OrderItem.objects.all()
+#     serializer_class = serializers.OrderItemListSerializer
+#     permission_classes = [IsAuthenticated]
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset().filter(user=self.request.user)
+#         return queryset

@@ -179,3 +179,14 @@ class SizeSerializer(serializers.ModelSerializer):
             "last_updated",
             "created",
         ]
+
+
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Brand
+        fields = ['id', 'name', 'created', 'last_updated']
+
+class MaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Material
+        fields = ['id', 'name', 'created', 'last_updated']
